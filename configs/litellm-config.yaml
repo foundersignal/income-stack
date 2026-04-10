@@ -1,0 +1,150 @@
+model_list:
+- model_name: gpt-4o
+  litellm_params:
+    model: groq/moonshotai/kimi-k2-instruct
+    api_key: os.environ/GROQ_API_KEY
+- model_name: gpt-4o
+  litellm_params:
+    model: groq/llama-3.3-70b-versatile
+    api_key: os.environ/GROQ_API_KEY
+- model_name: gpt-4o
+  litellm_params:
+    model: gemini/gemini-2.5-flash
+    api_key: os.environ/GEMINI_API_KEY
+- model_name: gpt-4o
+  litellm_params:
+    model: sambanova/Meta-Llama-3.3-70B-Instruct
+    api_key: os.environ/SAMBANOVA_API_KEY
+- model_name: gpt-4o
+  litellm_params:
+    model: cerebras/llama3.1-8b
+    api_key: os.environ/CEREBRAS_API_KEY
+- model_name: agent
+  litellm_params:
+    model: groq/moonshotai/kimi-k2-instruct
+    api_key: os.environ/GROQ_API_KEY
+- model_name: agent
+  litellm_params:
+    model: groq/llama-3.3-70b-versatile
+    api_key: os.environ/GROQ_API_KEY
+- model_name: agent
+  litellm_params:
+    model: cerebras/llama3.1-8b
+    api_key: os.environ/CEREBRAS_API_KEY
+- model_name: fast
+  litellm_params:
+    model: groq/llama-3.3-70b-versatile
+    api_key: os.environ/GROQ_API_KEY
+- model_name: fast
+  litellm_params:
+    model: gemini/gemini-2.5-flash
+    api_key: os.environ/GEMINI_API_KEY
+- model_name: fast
+  litellm_params:
+    model: cerebras/llama3.1-8b
+    api_key: os.environ/CEREBRAS_API_KEY
+- model_name: complex
+  litellm_params:
+    model: gemini/gemini-2.5-flash
+    api_key: os.environ/GEMINI_API_KEY
+- model_name: complex
+  litellm_params:
+    model: cerebras/qwen-3-235b-a22b-instruct-2507
+    api_key: os.environ/CEREBRAS_API_KEY
+- model_name: complex
+  litellm_params:
+    model: sambanova/DeepSeek-R1-0528
+    api_key: os.environ/SAMBANOVA_API_KEY
+- model_name: complex
+  litellm_params:
+    model: openrouter/openai/gpt-oss-120b:free
+    api_key: os.environ/OPENROUTER_API_KEY
+- model_name: coding
+  litellm_params:
+    model: groq/moonshotai/kimi-k2-instruct
+    api_key: os.environ/GROQ_API_KEY
+- model_name: coding
+  litellm_params:
+    model: openrouter/qwen/qwen3-coder:free
+    api_key: os.environ/OPENROUTER_API_KEY
+- model_name: coding
+  litellm_params:
+    model: groq/openai/gpt-oss-120b
+    api_key: os.environ/GROQ_API_KEY
+- model_name: reasoning
+  litellm_params:
+    model: sambanova/DeepSeek-R1-0528
+    api_key: os.environ/SAMBANOVA_API_KEY
+- model_name: reasoning
+  litellm_params:
+    model: cerebras/qwen-3-235b-a22b-instruct-2507
+    api_key: os.environ/CEREBRAS_API_KEY
+- model_name: reasoning
+  litellm_params:
+    model: gemini/gemini-2.5-flash
+    api_key: os.environ/GEMINI_API_KEY
+- model_name: volume
+  litellm_params:
+    model: mistral/mistral-large-latest
+    api_key: os.environ/MISTRAL_API_KEY
+- model_name: power
+  litellm_params:
+    model: sambanova/DeepSeek-V3.2
+    api_key: os.environ/SAMBANOVA_API_KEY
+- model_name: power
+  litellm_params:
+    model: groq/openai/gpt-oss-120b
+    api_key: os.environ/GROQ_API_KEY
+- model_name: power
+  litellm_params:
+    model: gemini/gemini-2.5-pro
+    api_key: os.environ/GEMINI_API_KEY
+- model_name: content
+  litellm_params:
+    model: groq/llama-3.3-70b-versatile
+    api_key: os.environ/GROQ_API_KEY
+- model_name: content
+  litellm_params:
+    model: mistral/mistral-large-latest
+    api_key: os.environ/MISTRAL_API_KEY
+- model_name: content
+  litellm_params:
+    model: gemini/gemini-2.5-flash
+    api_key: os.environ/GEMINI_API_KEY
+router_settings:
+  routing_strategy: usage-based-routing-v2
+  num_retries: 3
+  retry_after: 5
+  allowed_fails: 2
+  cooldown_time: 60
+  context_window_fallbacks:
+  - gpt-4o:
+    - complex
+    - power
+  - agent:
+    - complex
+    - power
+  - fast:
+    - complex
+    - power
+  - coding:
+    - complex
+    - power
+  fallbacks:
+  - gpt-4o:
+    - complex
+  - agent:
+    - complex
+  - fast:
+    - complex
+  - coding:
+    - complex
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  ui_username: admin
+  ui_password: admin123
+  database_url: postgresql://litellm:litellm123@localhost:5432/litellm
+litellm_settings:
+  drop_params: true
+  set_verbose: false
+  num_retries: 3

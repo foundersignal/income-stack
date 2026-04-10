@@ -1,0 +1,15 @@
+[Unit]
+Description=CashClaw Freelancer Dashboard
+After=network.target openclaw.service
+Wants=openclaw.service
+
+[Service]
+Type=simple
+EnvironmentFile=/home/claude/.env
+ExecStart=/usr/bin/node /usr/lib/node_modules/cashclaw/bin/cashclaw.js dashboard
+Restart=on-failure
+RestartSec=15
+WorkingDirectory=/root/.cashclaw
+
+[Install]
+WantedBy=multi-user.target

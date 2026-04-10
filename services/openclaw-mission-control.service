@@ -1,0 +1,15 @@
+[Unit]
+Description=OpenClaw Mission Control Dashboard
+After=network.target openclaw.service
+
+[Service]
+Type=simple
+WorkingDirectory=/root/.openclaw/openclaw-mission-control
+Environment=PORT=3333
+Environment=HOST=127.0.0.1
+ExecStart=/usr/bin/node /root/.openclaw/openclaw-mission-control/node_modules/.bin/next start -H 127.0.0.1 -p 3333
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

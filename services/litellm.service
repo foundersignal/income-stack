@@ -1,0 +1,14 @@
+[Unit]
+Description=LiteLLM Proxy Router
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=/home/claude/.env
+ExecStart=/usr/local/bin/litellm --host 127.0.0.1 --port 4000 --config /opt/litellm/config.yaml
+Restart=always
+RestartSec=5
+WorkingDirectory=/opt/litellm
+
+[Install]
+WantedBy=multi-user.target

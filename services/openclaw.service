@@ -1,0 +1,18 @@
+[Unit]
+Description=OpenClaw AI Assistant Gateway
+After=network.target litellm.service
+Requires=litellm.service
+
+[Service]
+Type=simple
+EnvironmentFile=/home/claude/.env
+EnvironmentFile=/etc/openclaw.env
+ExecStart=/usr/bin/node /usr/lib/node_modules/openclaw/dist/index.js gateway --port 18789 --bind loopback
+Restart=on-failure
+RestartSec=30
+StartLimitIntervalSec=300
+StartLimitBurst=5
+WorkingDirectory=/root/.openclaw
+
+[Install]
+WantedBy=multi-user.target
